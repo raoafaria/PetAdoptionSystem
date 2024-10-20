@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_package = "com.example.petadoption";
+option java_outer_classname = "PetAdoptionProto";
+
+// Service definition
+service PetAdoption {
+    // Register a new pet
+    rpc RegisterPet (Pet) returns (RegistrationResponse);
+
+    // Search for a pet
+    rpc SearchPet (SearchRequest) returns (PetList);
+}
+
+// Message to represent a Pet's details
+message Pet {
+    string name = 1;
+    string gender = 2;
+    int32 age = 3;
+    string breed = 4;
+    string picture_url = 5;
+}
+
+// Request for searching a pet by name, gender, age, or breed
+message SearchRequest {
+    string name = 1;
+    string gender = 2;
+    int32 age = 3;
+    string breed = 4;
+}
+
+// Response for registration
+message RegistrationResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+// List of pets to return in search results
+message PetList {
+    repeated Pet pets = 1;
+}
